@@ -27,7 +27,7 @@ Set repository Settings → Pages → Source to GitHub Actions. The included wor
 ## Features
 
 - 27 projects/collections, 42 artwork boards, six categories, search and full-image viewer.
-- Fixed header, native system pointer, entry transitions, scroll reveals, artwork hover highlights and magnetic contact button.
+- Fixed header, contextual custom cursor that replaces the native pointer while active, entry transitions, scroll reveals, artwork hover highlights and magnetic contact button.
 - Procedural fog with viewport/visibility pause and capped rendering resolution/frame rate.
 - Traditional Chinese/English, responsive layout, motion pause and reduced-motion support.
 - Silent throughout; no audio or video dependencies.
