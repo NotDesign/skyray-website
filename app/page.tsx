@@ -70,7 +70,6 @@ export default function Home() {
     <a href="#main" className="skip-link">{t("Skip to content", "跳至主要內容")}</a>
     <header className="header">
       <a href="#" className="brand" aria-label="Skyray home"><img src={`${import.meta.env.BASE_URL}images/skyray-logo.svg`} width="240" height="32" alt="SKYRAY" /></a>
-      <span className="header-studio mono">INDEPENDENT<br />CREATIVE STUDIO</span>
       <nav className={menu ? "nav open" : "nav"} aria-label={t("Main navigation", "主要導覽")}>
         {[["work","Work","作品"],["approach","Approach","創作思考"],["studio","Studio","工作室"]].map(([id,en,cn]) => <a key={id} href={`#${id}`} onClick={() => setMenu(false)}>{t(en,cn)}<ArrowUpRight size={13}/></a>)}
         <button onClick={() => {setMenu(false);openBrief();}}>{t("Start a project", "開始合作")}<ArrowUpRight size={15}/></button>
