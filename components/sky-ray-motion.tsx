@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { AnimationItem } from "lottie-web";
 
-/** One point opens into several sky rays: one idea, many creative forms. */
+/** A recognizable cloud opening lets silver-blue light through: sky + ray. */
 export default function SkyRayMotion({ paused, className = "" }: { paused: boolean; className?: string }) {
   const rootRef = useRef<HTMLSpanElement>(null);
   const playerRef = useRef<HTMLSpanElement>(null);
@@ -88,15 +88,13 @@ export default function SkyRayMotion({ paused, className = "" }: { paused: boole
 
   return <span ref={rootRef} className={`sky-ray-motion ${className}`} aria-hidden="true" data-renderer="static-svg" data-motion-state="static" style={{ display: "block", position: "relative", width: "100%", height: "100%" }}>
     <svg viewBox="0 0 200 200" fill="none" style={{ display: "block", width: "100%", height: "100%", visibility: ready ? "hidden" : "visible" }}>
-      <path d="M24 161H182" stroke="#b8dcf2" strokeWidth=".8" opacity=".2"/>
+      <path d="M98 118H128L176 179H112Z" fill="#b8dcf2" opacity=".12"/>
       <g strokeLinecap="round">
-        <path d="M40 150C97 140 152 92 160 34" stroke="#eef3f7" strokeWidth="2.5" opacity=".9"/>
-        <path d="M40 150C110 158 166 117 184 73" stroke="#b8dcf2" strokeWidth="1.6" opacity=".8"/>
-        <path d="M40 150C88 118 129 80 119 27" stroke="#b8dcf2" strokeWidth="1.7" opacity=".7"/>
-        <path d="M40 150C90 164 135 143 166 122" stroke="#b8dcf2" strokeWidth="1.2" opacity=".6"/>
-        <path d="M173 25H181M177 21V29" stroke="#b8dcf2" opacity=".42"/>
+        <path d="M99 124L112 177" stroke="#b8dcf2" strokeWidth="1.7" opacity=".68"/>
+        <path d="M112 124L143 177" stroke="#eef3f7" strokeWidth="2.2" opacity=".95"/>
+        <path d="M126 124L176 177" stroke="#b8dcf2" strokeWidth="1.7" opacity=".65"/>
+        <path d="M42 114C25 114 19 99 27 88C32 80 41 77 50 79C52 59 69 49 84 55C95 30 131 37 137 62C159 56 181 75 177 94C176 106 166 114 153 114M42 114H94M132 114H153" stroke="#eef3f7" strokeWidth="2.4" opacity=".92"/>
       </g>
-      <circle cx="40" cy="150" r="3" fill="#eef3f7"/>
     </svg>
     <span ref={playerRef} style={{ position: "absolute", inset: 0, display: "block" }}/>
   </span>;

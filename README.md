@@ -29,7 +29,7 @@ Set repository Settings → Pages → Source to GitHub Actions. The included wor
 - 27 projects/collections, 42 artwork boards, six categories, search and full-image viewer.
 - Fixed header, contextual custom cursor that replaces the native pointer while active, entry transitions, scroll reveals, artwork hover highlights and a text-led magnetic contact invitation.
 - Procedural fog with viewport/visibility pause, a 960×440 backing-surface ceiling and capped frame rate. Pointer work is batched per animation frame, with no delayed cursor chase or per-event text replacement.
-- Bespoke Sky / Ray Lottie vector motif in the studio and contact sections: 6.7 KB JSON, deferred SVG light player, static fallback, paused offscreen and with reduced motion.
+- Bespoke cloud-and-light Lottie motif in the studio: recognizable cloud silhouettes with light emerging between them, a deferred SVG light player, static fallback, paused offscreen and with reduced motion.
 - Traditional Chinese/English, responsive layout, motion pause and reduced-motion support.
 - Silent throughout; no audio or video dependencies.
 
@@ -48,4 +48,8 @@ The site follows a web-specific 16/14/12px type hierarchy using rem units: body 
 
 Verified at 1440, 768, 390 and 320 CSS-pixel widths: no page overflow, visible text at least 12px, and measured visible link/button/input targets at least 44px. Mobile artwork and brief dialogs retain full images, 16px text fields and 44px controls. This is targeted validation, not a full accessibility conformance audit.
 
-The Lottie source is `public/animations/skyray-ray.json`, authored for this site as light spreading from one point into multiple paths. It uses no raster images, blur effects, expressions or audio. The player loads only near the section and stops while offscreen, hidden or paused. Generic link cursors use a small ring; only artwork and drag interactions carry contextual labels.
+The Lottie source is `public/animations/skyray-ray.json`, authored for this site as light emerging through recognizable cloud layers. It is captioned “雲間見光 / LIGHT THROUGH CLOUDS” in the studio section; the contact invitation stays focused on its text action. It uses no raster images, blur effects, expressions or audio. The player loads only near the section and stops while offscreen, hidden or paused. Generic link cursors use a small ring; only artwork and drag interactions carry contextual labels.
+
+Hover color, background and border changes ease over 400 ms in both directions. The pointer position has no transition delay; paused/reduced-motion preferences still disable transitions.
+
+Project navigation is anchored to the dialog: fixed side controls on desktop and a fixed central bottom bar on mobile. The project counter stays in the bottom bar; image proportions, description wrapping and series thumbnails cannot move the controls. Full-image fit and zoom remain available.
