@@ -26,14 +26,18 @@ export default function SiteEffects({ enabled, contentKey }: { enabled: boolean;
     const elements = document.querySelectorAll<HTMLElement>("[data-reveal]");
     if (!enabled) { elements.forEach(el => el.classList.add("is-visible")); return; }
     const observer = new IntersectionObserver(entries => {
-      for (const entry of entries) if (entry.isIntersecting) {
-        entry.target.classList.add("is-visible"); observer.unobserve(entry.target);
+      for (const entry of entries) {
+        const element = entry.target as HTMLElement;
+        const visible = entry.isIntersecting && entry.intersectionRatio > .035;
+        element.classList.toggle("is-visible", visible);
+        element.dataset.revealSide = entry.boundingClientRect.top < 0 ? "above" : "below";
       }
-    }, { threshold: .08, rootMargin: "0px 0px -20px 0px" });
-    elements.forEach(el => {
-      // Already-above-viewport content stays visible after a filter or language change.
-      if (el.getBoundingClientRect().bottom < 0) el.classList.add("is-visible");
-      else if (!el.classList.contains("is-visible")) observer.observe(el);
+    }, { threshold: [0, .035], rootMargin: "-80px 0px -18px 0px" });
+    elements.forEach(element => {
+      const rect = element.getBoundingClientRect();
+      element.dataset.revealSide = rect.top < 0 ? "above" : "below";
+      element.classList.toggle("is-visible", rect.bottom > 90 && rect.top < innerHeight - 18);
+      observer.observe(element);
     });
     document.documentElement.classList.add("reveal-ready");
     return () => observer.disconnect();

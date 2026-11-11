@@ -48,8 +48,10 @@ The site follows a web-specific 16/14/12px type hierarchy using rem units: body 
 
 Verified at 1440, 768, 390 and 320 CSS-pixel widths: no page overflow, visible text at least 12px, and measured visible link/button/input targets at least 44px. Mobile artwork and brief dialogs retain full images, 16px text fields and 44px controls. This is targeted validation, not a full accessibility conformance audit.
 
-The experimental Lottie component and source are retained for editing but are not imported or rendered by the site; no Lottie player is loaded. Generic link cursors use a small ring. Artwork, filter, drag and contact cursors retain circular shapes with short contextual labels.
+The experimental Lottie component and source are retained for editing but are not imported or rendered by the site; no Lottie player is loaded. Generic link cursors use a small ring. Artwork, filter, drag and contact cursors retain circular shapes with short English labels in both page languages: VIEW, FILTER, SWITCH, DRAG and LET’S TALK.
 
 Hover color, background and border changes ease over 400 ms in both directions. The pointer position has no transition delay; paused/reduced-motion preferences still disable transitions.
 
 Project navigation is anchored to the dialog: fixed side controls on desktop and a fixed central bottom bar on mobile. The project counter stays in the bottom bar; image proportions, description wrapping and series thumbnails cannot move the controls. Full-image fit and zoom remain available.
+
+The page continues from the footer into a single interactive hero continuation and then returns to the original hero at matching screen coordinates. Repeated scrolling reuses the same DOM; modal/menu interactions block the handoff. Pausing effects or requesting reduced motion disables the loop. Section content reveals on each entry and fades out when leaving the viewport, including subsequent laps. Downward links move their icons vertically, and the search icon shares one high-contrast input shell. Gradient headline lettering includes paint space for the final question mark.
