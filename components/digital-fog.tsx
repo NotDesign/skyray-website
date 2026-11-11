@@ -35,7 +35,7 @@ function cloudTexture() {
     const edge = Math.max(0, 1 - smooth(Math.min(1, radius)));
     const density = Math.max(0, value - .32) ** 1.25 * edge;
     const i = (y * size + x) * 4;
-    pixels.data[i] = 163; pixels.data[i + 1] = 185; pixels.data[i + 2] = 191;
+    pixels.data[i] = 148; pixels.data[i + 1] = 187; pixels.data[i + 2] = 224;
     pixels.data[i + 3] = Math.min(255, density * 440);
   }
   context.putImageData(pixels, 0, 0);
@@ -62,12 +62,12 @@ export default function DigitalFog({ paused }: { paused: boolean }) {
       const time = timeRef.current;
       for (let i = 0; i < 5; i++) {
         const x = width * (.04 + i * .26) + Math.sin(time * .15 + i * 2.1) * width * .09 + pointerX * (i + 1) * 5;
-        const y = height * (.26 + (i % 2) * .2) + Math.cos(time * .12 + i) * height * .11 + pointerY * (i + 1) * 3;
-        const w = Math.max(500, width * .8), h = Math.max(340, height * .95);
+        const y = height * (.4 + (i % 2) * .16) + Math.cos(time * .12 + i) * height * .06 + pointerY * (i + 1) * 3;
+        const w = Math.max(500, width * .8), h = Math.max(250, height * .65);
         context.save();
         context.translate(x, y);
-        context.rotate(Math.sin(time * .06 + i) * .18);
-        context.globalAlpha = finePointer.matches ? .7 : .48;
+        context.rotate(-.12 + Math.sin(time * .06 + i) * .06);
+        context.globalAlpha = finePointer.matches ? .52 : .4;
         context.drawImage(texture, -w / 2, -h / 2, w, h);
         context.restore();
       }
@@ -119,5 +119,5 @@ export default function DigitalFog({ paused }: { paused: boolean }) {
       document.removeEventListener("visibilitychange", resume);
     };
   }, [paused]);
-  return <div className="digital-fog" aria-hidden="true"><canvas ref={canvasRef}/><div className="fog-grid"/></div>;
+  return <div className="digital-fog" aria-hidden="true"><div className="sky-light"/><canvas ref={canvasRef}/><div className="sky-horizon"/></div>;
 }
