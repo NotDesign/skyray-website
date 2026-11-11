@@ -63,13 +63,17 @@ export default function DigitalFog({ paused }: { paused: boolean }) {
       context.globalCompositeOperation = "screen";
       const time = timeRef.current;
       for (let i = 0; i < 5; i++) {
-        const x = width * (.04 + i * .26) + Math.sin(time * .15 + i * 2.1) * width * .09 + pointerX * (i + 1) * 5;
-        const y = height * (.4 + (i % 2) * .16) + Math.cos(time * .12 + i) * height * .06 + pointerY * (i + 1) * 3;
-        const w = Math.max(500, width * .8), h = Math.max(250, height * .65);
+        // Different drift rates and breathing scales make depth visible without
+        // adding draw calls or enlarging the bounded backing surface.
+        const drift = time * (.21 + i * .035);
+        const breath = 1 + Math.sin(time * .24 + i * 1.7) * .09;
+        const x = width * (.04 + i * .26) + Math.sin(drift + i * 2.1) * width * .16 + pointerX * (i + 1) * 9;
+        const y = height * (.4 + (i % 2) * .16) + Math.cos(time * (.18 + i * .018) + i) * height * .1 + pointerY * (i + 1) * 5;
+        const w = Math.max(500, width * .78) * breath, h = Math.max(250, height * .65) / breath;
         context.save();
         context.translate(x, y);
-        context.rotate(-.12 + Math.sin(time * .06 + i) * .06);
-        context.globalAlpha = finePointer.matches ? .52 : .4;
+        context.rotate(-.12 + Math.sin(time * .12 + i) * .1);
+        context.globalAlpha = (finePointer.matches ? .6 : .46) * (.88 + .12 * Math.sin(time * .3 + i));
         context.drawImage(texture, -w / 2, -h / 2, w, h);
         context.restore();
       }
@@ -81,8 +85,8 @@ export default function DigitalFog({ paused }: { paused: boolean }) {
       if (now - last >= interval) {
         timeRef.current += Math.min((now - (last || now)) / 1000, .06);
         last = now;
-        pointerX += (targetX - pointerX) * .045;
-        pointerY += (targetY - pointerY) * .045;
+        pointerX += (targetX - pointerX) * .06;
+        pointerY += (targetY - pointerY) * .06;
         paint();
       }
       frame = requestAnimationFrame(tick);

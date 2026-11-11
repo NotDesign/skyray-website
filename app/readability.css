@@ -279,3 +279,53 @@ body { font-size: var(--text-body); line-height: 1.65; }
   .results-label { flex-direction: column; gap: 6px; }
   .company-facts div { grid-template-columns: 1fr; gap: 4px; }
 }
+
+/* Shared caption rows keep titles/categories aligned without cropping artwork. */
+.hero-gallery { align-items: end; }
+.hero-gallery .hero-secondary { padding: 0; }
+.hero-caption { display: grid; grid-template-rows: 24px 24px; gap: 8px; height: 72px; margin-top: 16px; text-align: left; align-content: start; }
+.hero-caption .hero-card-meta { display: flex; align-items: start; flex-wrap: nowrap; gap: 8px; margin: 0; font-size: var(--text-body); line-height: 1.5; }
+.hero-caption .hero-card-category { display: block; margin: 0; font-size: var(--text-meta); line-height: 1.6; color: var(--text-subtle); text-align: left; }
+@media (max-width: 760px) {
+  .hero-caption { height: 104px; grid-template-rows: 48px 40px; }
+}
+
+/* Accordion height, copy and indicator share one deliberate open/close rhythm. */
+.expertise-panel { display: grid; grid-template-rows: 0fr; visibility: hidden; transition: grid-template-rows .4s cubic-bezier(.22,.68,.2,1), visibility 0s .4s; }
+.expertise-panel.is-open { grid-template-rows: 1fr; visibility: visible; transition-delay: 0s; }
+.expertise-clip { min-height: 0; overflow: hidden; }
+.expertise-panel .expertise-detail { opacity: 0; transform: translateY(-6px); transition: opacity .25s ease, transform .4s cubic-bezier(.22,.68,.2,1); }
+.expertise-panel.is-open .expertise-detail { opacity: 1; transform: none; transition-delay: .07s, 0s; }
+.expertise-toggle-icon { position: relative; flex: 0 0 20px; width: 20px; height: 20px; margin-left: auto; }
+.expertise-toggle-icon::before, .expertise-toggle-icon::after { content: ""; position: absolute; left: 3px; right: 3px; top: 9px; height: 2px; border-radius: 2px; background: currentColor; transition: transform .35s ease, opacity .25s ease; }
+.expertise-toggle-icon::after { transform: rotate(90deg); }
+.expertise-item.active .expertise-toggle-icon::after { transform: rotate(0); opacity: 0; }
+.expertise-item > button { transition: color .4s ease; }
+.expertise-item > button:hover { color: var(--accent); }
+
+/* Feedback stays restrained: short press, smooth state changes, clear focus. */
+.filter-group button, .hero-tabs button, .language, .motion-toggle, .menu-toggle,
+.viewer-mode, .viewer-project-nav button, .solid-button, [data-slot=dialog-close] {
+  transition: color .4s ease, background-color .4s ease, border-color .4s ease, opacity .3s ease, scale .16s ease;
+}
+.filter-group button:active, .hero-tabs button:active, .language:active, .motion-toggle:active,
+.menu-toggle:active, .viewer-mode:active, .viewer-project-nav button:active,
+.solid-button:active, [data-slot=dialog-close]:active { scale: .96; }
+.asset-strip button { transition: opacity .3s ease, border-color .4s ease, scale .16s ease; }
+.asset-strip button:active { scale: .96; }
+.brief-dialog input, .brief-dialog textarea, .brief-dialog select { transition: border-color .3s ease, background-color .3s ease, box-shadow .3s ease; }
+.brief-dialog input:focus, .brief-dialog textarea:focus, .brief-dialog select:focus { border-color: #b8dcf2; background: #15212d; box-shadow: 0 0 0 2px #b8dcf22b; }
+.solid-button:hover { background: #d4eafa; }
+@keyframes media-reveal { from { opacity: 0; scale: .985; } to { opacity: 1; scale: 1; } }
+@keyframes copy-reveal { from { opacity: 0; translate: 0 5px; } to { opacity: 1; translate: 0 0; } }
+html[data-motion=on] .viewer-art > img { animation: media-reveal .35s cubic-bezier(.2,.7,.2,1) both; }
+html[data-motion=on] .viewer-info, html[data-motion=on] .form-status { animation: copy-reveal .3s ease both; }
+html[data-motion=on] [data-slot=dialog-content], html[data-motion=on] [data-slot=dialog-overlay] { animation-duration: .3s; }
+@media (max-width: 960px) {
+  .header .nav { position: absolute; display: flex; top: calc(var(--header-height) - 1px); left: 0; right: 0; margin: 0; padding: 24px 6%; max-height: calc(100dvh - var(--header-height)); overflow-y: auto; flex-direction: column; align-items: stretch; gap: 10px; background: #10161d; border-bottom: 1px solid #354352; opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(-8px); transition: opacity .25s ease, transform .3s ease, visibility 0s .3s; }
+  .header .nav.open { opacity: 1; visibility: visible; pointer-events: auto; transform: none; transition-delay: 0s; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .expertise-panel, .expertise-detail, .expertise-toggle-icon::after, .header .nav { transition: none !important; }
+  .viewer-art > img, .viewer-info, .form-status { animation: none !important; }
+}
