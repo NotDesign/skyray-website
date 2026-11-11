@@ -4,7 +4,6 @@ import { ArrowUpRight, ArrowDown, ArrowLeft, ArrowRight, Search, X, Menu, Plus, 
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import DigitalFog from "@/components/digital-fog";
 import SiteEffects from "@/components/site-effects";
-import SkyRayMotion from "@/components/sky-ray-motion";
 import { categories, projects, assetCount, type Asset } from "@/lib/portfolio";
 
 const expertise = [
@@ -92,7 +91,7 @@ export default function Home() {
       </section>
       <section id="studio" className="studio section-pad">
         <div className="section-kicker mono"><span>03 / THE STUDIO</span><span>CONNECTED BY CURIOSITY</span></div>
-        <div className="studio-intro" data-reveal><div className="studio-signature"><span className="studio-symbol" aria-hidden="true"><SkyRayMotion paused={!motionOn}/></span><span className="studio-motion-caption mono">{t("LIGHT THROUGH CLOUDS", "雲間見光")}</span></div><h2>{t("A small idea can", "從一個想法，")}<br/>{t("open up a world.", "打開整個世界。")}</h2><p>{t("Skyray brings together game development and visual design, with services spanning software, 3D and multimedia. Our Taiwan branch was established in 2022. Inspired by art and technology, we turn ideas into complete experiences.", "Skyray 結合遊戲研發與美術設計，提供軟體開發、3D 與多媒體創作服務。我們於 2022 年設立台灣分公司，從藝術與科技汲取靈感，讓每個想法逐步成為完整體驗。")}</p></div>
+        <div className="studio-intro" data-reveal><h2>{t("A small idea can", "從一個想法，")}<br/>{t("open up a world.", "打開整個世界。")}</h2><p>{t("Skyray brings together game development and visual design, with services spanning software, 3D and multimedia. Our Taiwan branch was established in 2022. Inspired by art and technology, we turn ideas into complete experiences.", "Skyray 結合遊戲研發與美術設計，提供軟體開發、3D 與多媒體創作服務。我們於 2022 年設立台灣分公司，從藝術與科技汲取靈感，讓每個想法逐步成為完整體驗。")}</p></div>
         <div className="studio-content" data-reveal><figure className="studio-photo"><img src={`${import.meta.env.BASE_URL}images/studio.webp`} width="1600" height="783" alt={t("Inside the Skyray studio", "Skyray 工作室內部")} loading="lazy"/><figcaption className="mono">INSIDE SKYRAY / A SPACE TO CREATE</figcaption></figure><div className="expertise">{expertise.map((s,i)=><div key={s.en} className={`expertise-item ${service===i ? "active" : ""}`}><button onClick={()=>setService(service===i ? -1 : i)} aria-expanded={service===i} aria-controls={`expertise-${i}`}><span className="mono">0{i+1}</span><h3>{t(s.en,s.zh)}</h3>{service===i ? <Minus size={20}/> : <Plus size={20}/>}</button><div className="expertise-detail" id={`expertise-${i}`} hidden={service!==i}><p>{t(s.description,s.descriptionZh)}</p><span className="mono">{s.tags}</span><button className="line-link" onClick={()=>goToWork(s.filter)}>{t("Explore related work","探索相關作品")}<ArrowUpRight size={16}/></button></div></div>)}</div></div>
         <div className="company-details" data-reveal>
           <div><span className="mono">ART & TECHNOLOGY / SINCE 2022 IN TAIWAN</span><h3 className="company-name">Skyray Limited</h3><p className="company-legal">香港商天宏軟體製作有限公司台灣分公司</p><p className="company-services">{t("Game development · Custom apps · Web & UX · Cloud systems · 3D & VFX · Visual design", "遊戲開發・客製 App・網站與 UX・雲端後台・3D 與 VFX・視覺設計")}</p></div>

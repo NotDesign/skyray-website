@@ -187,7 +187,6 @@ body { font-size: var(--text-body); line-height: 1.65; }
   .hero-gallery { gap: 24px 18px; }
   .hero-card-meta { flex-wrap: wrap; gap: 5px 12px; }
   .hero-card-meta > .mono { text-align: left; }
-  .studio-intro { grid-template-columns: .6fr 2fr 2fr; gap: 24px; }
 }
 
 @media (max-width: 960px) {
@@ -218,7 +217,7 @@ body { font-size: var(--text-body); line-height: 1.65; }
   .hero-gallery { grid-template-columns: 1fr 1fr; }
   .hero-feature { grid-column: 1 / -1; }
   .hero-package { padding-top: 20px; }
-  .studio-intro { grid-template-columns: .6fr 2fr; }
+  .studio-intro { grid-template-columns: minmax(0, 1fr); gap: 24px; }
   .studio-intro p { grid-column: 1 / -1; max-width: 680px; }
   .company-details { grid-template-columns: 1fr; gap: 32px; }
 }
