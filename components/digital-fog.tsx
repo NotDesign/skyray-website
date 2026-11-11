@@ -53,8 +53,10 @@ export default function DigitalFog({ paused }: { paused: boolean }) {
     if (!context) return;
     const texture = textureRef.current ?? (textureRef.current = cloudTexture());
     const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
-    let width = 1, height = 1, frame = 0, visible = true, last = 0;
+    let width = 0, height = 0, frame = 0, visible = true, last = 0;
     let targetX = 0, targetY = 0, pointerX = 0, pointerY = 0;
+    let pageLeft = 0, pageTop = 0;
+    let pointer: { x: number; y: number } | null = null;
     const animate = !paused;
     const paint = () => {
       context.clearRect(0, 0, width, height);
@@ -89,33 +91,47 @@ export default function DigitalFog({ paused }: { paused: boolean }) {
       cancelAnimationFrame(frame); frame = 0; last = 0;
       if (animate && visible && !document.hidden) frame = requestAnimationFrame(tick);
     };
+    const updateTarget = () => {
+      if (!pointer || !animate || !visible || !finePointer.matches) return;
+      // Page coordinates keep the cached bounds valid while the page scrolls.
+      targetX = Math.max(-1, Math.min(1, (pointer.x + scrollX - pageLeft) / width * 2 - 1));
+      targetY = Math.max(-1, Math.min(1, (pointer.y + scrollY - pageTop) / height * 2 - 1));
+    };
     const resize = () => {
       const bounds = canvas.getBoundingClientRect();
-      const scale = Math.min(devicePixelRatio || 1, 1.25);
-      width = bounds.width; height = bounds.height;
-      canvas.width = Math.round(width * scale); canvas.height = Math.round(height * scale);
-      context.setTransform(scale, 0, 0, scale, 0, 0);
+      pageLeft = bounds.left + scrollX; pageTop = bounds.top + scrollY;
+      const nextWidth = Math.max(1, bounds.width), nextHeight = Math.max(1, bounds.height);
+      if (width === nextWidth && height === nextHeight) { updateTarget(); return; }
+      width = nextWidth; height = nextHeight;
+      // Soft fog needs no high-DPR surface. Bound the five blended layers while
+      // keeping their geometry and motion in CSS pixels at every viewport size.
+      const scale = Math.min(1, 960 / width, 440 / height);
+      canvas.width = Math.max(1, Math.round(width * scale));
+      canvas.height = Math.max(1, Math.round(height * scale));
+      context.setTransform(canvas.width / width, 0, 0, canvas.height / height, 0, 0);
+      updateTarget();
       paint();
     };
     const move = (event: PointerEvent) => {
-      if (!animate || !finePointer.matches || event.pointerType !== "mouse") return;
-      const bounds = canvas.getBoundingClientRect();
-      targetX = Math.max(-1, Math.min(1, (event.clientX - bounds.left) / bounds.width * 2 - 1));
-      targetY = Math.max(-1, Math.min(1, (event.clientY - bounds.top) / bounds.height * 2 - 1));
+      if (!animate || !visible || !finePointer.matches || event.pointerType !== "mouse") return;
+      pointer = { x: event.clientX, y: event.clientY };
+      updateTarget();
     };
-    const leave = () => { targetX = 0; targetY = 0; };
+    const leave = () => { pointer = null; targetX = 0; targetY = 0; };
     const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; resume(); });
     const resizeObserver = new ResizeObserver(resize);
     resizeObserver.observe(canvas); observer.observe(canvas);
     const hero = canvas.closest(".hero");
-    hero?.addEventListener("pointermove", move as EventListener);
+    hero?.addEventListener("pointermove", move as EventListener, { passive: true });
     hero?.addEventListener("pointerleave", leave);
+    window.addEventListener("scroll", updateTarget, { passive: true });
     document.addEventListener("visibilitychange", resume);
     resize(); resume();
     return () => {
       cancelAnimationFrame(frame); observer.disconnect(); resizeObserver.disconnect();
       hero?.removeEventListener("pointermove", move as EventListener);
       hero?.removeEventListener("pointerleave", leave);
+      window.removeEventListener("scroll", updateTarget);
       document.removeEventListener("visibilitychange", resume);
     };
   }, [paused]);

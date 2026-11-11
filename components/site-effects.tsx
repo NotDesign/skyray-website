@@ -42,6 +42,8 @@ export default function SiteEffects({ enabled, contentKey }: { enabled: boolean;
     if (!enabled) return;
     const pointer = window.matchMedia("(hover: hover) and (pointer: fine)");
     let magnetic: HTMLElement | null = null, spotlight: HTMLElement | null = null;
+    let effectFrame = 0;
+    let pending: { target: Element | null; x: number; y: number } | null = null;
     const resetMagnet = () => { magnetic?.style.removeProperty("--mag-x"); magnetic?.style.removeProperty("--mag-y"); magnetic = null; };
     const resetSpotlight = () => {
       spotlight?.removeAttribute("data-pointer");
@@ -49,28 +51,36 @@ export default function SiteEffects({ enabled, contentKey }: { enabled: boolean;
       spotlight?.style.removeProperty("--pointer-y");
       spotlight = null;
     };
-    const reset = () => { resetMagnet(); resetSpotlight(); };
-    const move = (event: PointerEvent) => {
-      if (!pointer.matches || event.pointerType !== "mouse") { reset(); return; }
-      const target = event.target instanceof Element ? event.target : null;
+    const reset = () => { cancelAnimationFrame(effectFrame); effectFrame = 0; pending = null; resetMagnet(); resetSpotlight(); };
+    const applyPointerEffects = () => {
+      effectFrame = 0;
+      const point = pending;
+      if (!point) return;
+      const target = point.target;
       if (!target || target.closest('[role="dialog"], textarea, select, input, [contenteditable="true"]')) { reset(); return; }
       const nextMagnet = target.closest<HTMLElement>("[data-magnetic]");
-      if (magnetic !== nextMagnet) resetMagnet();
-      magnetic = nextMagnet;
-      if (magnetic) {
-        const rect = magnetic.getBoundingClientRect();
-        magnetic.style.setProperty("--mag-x", `${Math.max(-10,Math.min(10,(event.clientX - rect.left - rect.width / 2) * .12))}px`);
-        magnetic.style.setProperty("--mag-y", `${Math.max(-10,Math.min(10,(event.clientY - rect.top - rect.height / 2) * .12))}px`);
-      }
       const nextSpotlight = target.closest<HTMLElement>(".project-card");
+      // Read geometry before any writes, and only once per animation frame.
+      const magnetRect = nextMagnet?.getBoundingClientRect();
+      const spotRect = nextSpotlight?.getBoundingClientRect();
+      if (magnetic !== nextMagnet) resetMagnet();
       if (spotlight !== nextSpotlight) resetSpotlight();
+      magnetic = nextMagnet;
       spotlight = nextSpotlight;
-      if (spotlight) {
-        const rect = spotlight.getBoundingClientRect();
-        spotlight.dataset.pointer = "true";
-        spotlight.style.setProperty("--pointer-x", `${event.clientX - rect.left}px`);
-        spotlight.style.setProperty("--pointer-y", `${event.clientY - rect.top}px`);
+      if (magnetic && magnetRect) {
+        magnetic.style.setProperty("--mag-x", `${Math.max(-6, Math.min(6, (point.x - magnetRect.left - magnetRect.width / 2) * .06))}px`);
+        magnetic.style.setProperty("--mag-y", `${Math.max(-6, Math.min(6, (point.y - magnetRect.top - magnetRect.height / 2) * .06))}px`);
       }
+      if (spotlight && spotRect) {
+        if (spotlight.dataset.pointer !== "true") spotlight.dataset.pointer = "true";
+        spotlight.style.setProperty("--pointer-x", `${point.x - spotRect.left}px`);
+        spotlight.style.setProperty("--pointer-y", `${point.y - spotRect.top}px`);
+      }
+    };
+    const move = (event: PointerEvent) => {
+      if (!pointer.matches || event.pointerType !== "mouse") { reset(); return; }
+      pending = { target: event.target instanceof Element ? event.target : null, x: event.clientX, y: event.clientY };
+      if (!effectFrame) effectFrame = requestAnimationFrame(applyPointerEffects);
     };
     const leave = (event: PointerEvent) => { if (!event.relatedTarget) reset(); };
     const visibility = () => { if (document.hidden) reset(); };
@@ -95,51 +105,46 @@ export default function SiteEffects({ enabled, contentKey }: { enabled: boolean;
     if (!cursor || !label) return;
     const root = document.documentElement;
     const pointer = window.matchMedia("(hover: hover) and (pointer: fine)");
-    let frame = 0, x = 0, y = 0, targetX = 0, targetY = 0, firstMove = true;
+    let frame = 0;
+    let targetElement: Element | null = null;
     const hide = () => {
-      cursor.dataset.visible = "false";
+      if (cursor.dataset.visible !== "false") cursor.dataset.visible = "false";
       root.classList.remove("custom-cursor-active");
       cancelAnimationFrame(frame);
       frame = 0;
-      firstMove = true;
     };
     const reset = () => { pointerPosition.current = null; hide(); };
     if (!enabled) { reset(); return; }
-    const draw = () => {
-      frame = 0;
-      x += (targetX - x) * .25;
-      y += (targetY - y) * .25;
-      cursor.style.transform = `translate3d(${x}px,${y}px,0)`;
-      if (Math.abs(targetX - x) + Math.abs(targetY - y) > .2) frame = requestAnimationFrame(draw);
-    };
     const update = (target: Element | null) => {
       const position = pointerPosition.current;
       // Keep native text-entry affordances; range sliders use the DRAG cursor.
       if (!pointer.matches || !position || !target || target.closest('textarea, select, input:not([type="range"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="checkbox"]):not([type="radio"]), [contenteditable]:not([contenteditable="false"])')) {
         hide(); return;
       }
-      targetX = position.x;
-      targetY = position.y;
-      if (firstMove) {
-        x = targetX; y = targetY; firstMove = false;
-        cursor.style.transform = `translate3d(${x}px,${y}px,0)`;
-      }
+      // Match the real hit point on the next paint; no delayed chase loop.
+      cursor.style.transform = `translate3d(${position.x}px,${position.y}px,0)`;
       const contextual = target.closest<HTMLElement>("[data-cursor]");
       const interactive = target.closest('button, a, input, [role="button"]');
-      cursor.dataset.kind = contextual?.dataset.cursorKind || (contextual ? "work" : interactive ? "link" : "default");
-      label.textContent = contextual?.dataset.cursor || (interactive ? "↗" : "");
-      cursor.dataset.visible = "true";
-      root.classList.add("custom-cursor-active");
-      if (!frame) frame = requestAnimationFrame(draw);
+      const kind = contextual?.dataset.cursorKind || (contextual ? "work" : interactive ? "link" : "default");
+      const text = contextual?.dataset.cursor || "";
+      // Context changes are infrequent; do not rebuild text on every mouse event.
+      if (cursor.dataset.kind !== kind) cursor.dataset.kind = kind;
+      if (label.textContent !== text) label.textContent = text;
+      if (cursor.dataset.visible !== "true") cursor.dataset.visible = "true";
+      if (!root.classList.contains("custom-cursor-active")) root.classList.add("custom-cursor-active");
+    };
+    const queue = () => {
+      if (!frame) frame = requestAnimationFrame(() => { frame = 0; update(targetElement); });
     };
     const move = (event: PointerEvent) => {
       if (event.pointerType !== "mouse") { reset(); return; }
       pointerPosition.current = { x: event.clientX, y: event.clientY };
-      update(event.target instanceof Element ? event.target : null);
+      targetElement = event.target instanceof Element ? event.target : null;
+      queue();
     };
     const refresh = () => {
       const position = pointerPosition.current;
-      if (position) update(document.elementFromPoint(position.x, position.y));
+      if (position) { targetElement = document.elementFromPoint(position.x, position.y); queue(); }
     };
     const leave = (event: PointerEvent) => { if (!event.relatedTarget) reset(); };
     const visibility = () => { if (document.hidden) reset(); };
