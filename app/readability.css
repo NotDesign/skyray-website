@@ -280,8 +280,15 @@ body { font-size: var(--text-body); line-height: 1.65; }
   .company-facts div { grid-template-columns: 1fr; gap: 4px; }
 }
 
-/* Shared caption rows keep titles/categories aligned without cropping artwork. */
-.hero-gallery { align-items: end; }
+/* Shared rows align headings, artwork frames and captions across each gallery row. */
+.hero-gallery { align-items: stretch; }
+.hero-feature, .hero-secondary { display: grid; grid-template-rows: subgrid; grid-row: span 3; row-gap: 0; }
+.hero-small-art { position: relative; min-height: 0; }
+.hero-small-art img { position: absolute; inset: 0; }
+.hero-gallery .hero-small-art { aspect-ratio: 1; }
+@media (min-width: 961px) {
+  .hero-gallery .hero-small-art { aspect-ratio: auto; }
+}
 .hero-gallery .hero-secondary { padding: 0; }
 .hero-caption { display: grid; grid-template-rows: 24px 24px; gap: 8px; height: 72px; margin-top: 16px; text-align: left; align-content: start; }
 .hero-caption .hero-card-meta { display: flex; align-items: start; flex-wrap: nowrap; gap: 8px; margin: 0; font-size: var(--text-body); line-height: 1.5; }
