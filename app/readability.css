@@ -84,7 +84,7 @@ body { font-size: var(--text-body); line-height: 1.65; }
 .hero-intro > p:not(.hero-zh),
 .work-heading p,
 .approach-heading p,
-.studio-intro p,
+.studio-description,
 .expertise-detail p,
 .contact-main p,
 .contact-bottom p,
@@ -243,7 +243,7 @@ body { font-size: var(--text-body); line-height: 1.65; }
   .hero-feature { grid-column: 1 / -1; }
   .hero-package { padding-top: 20px; }
   .studio-intro { grid-template-columns: minmax(0, 1fr); gap: 24px; }
-  .studio-intro p { grid-column: 1 / -1; max-width: 680px; }
+  .studio-description { max-width: 680px; }
   .company-details { grid-template-columns: 1fr; gap: 32px; }
 }
 
@@ -366,3 +366,7 @@ html[data-motion=on] [data-slot=dialog-content], html[data-motion=on] [data-slot
   .reveal-ready .motion-enabled [data-reveal][data-reveal-direction=left]:not(.is-visible):not(:focus-within) { translate: -16px 0; }
   .reveal-ready .motion-enabled [data-reveal][data-reveal-direction=right]:not(.is-visible):not(:focus-within) { translate: 16px 0; }
 }
+
+/* Keep the studio narrative together with its photograph. */
+.studio-overview { min-width: 0; }
+.studio-description { margin-top: 24px; }

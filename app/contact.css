@@ -1,11 +1,10 @@
 .company-contact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 88px); align-items: start; margin-top: 72px; padding-top: 56px; border-top: 1px solid var(--border); }
-.company-contact .company-name { font-size: clamp(1.75rem, 2.5vw, 2.75rem); font-weight: 500; line-height: 1.25; letter-spacing: -.035em; margin: 20px 0 12px; }
+.company-contact .company-name { margin: 24px 0 16px; }
+.company-name img { width: clamp(200px, 20vw, 300px); max-width: 100%; height: auto; }
 .company-contact .company-legal { font-size: 1rem; line-height: 1.8; }
-.company-description { font-size: 1rem; line-height: 1.85; color: var(--text-subtle); margin-top: 20px; max-width: 58ch; }
+.company-description { font-size: 1rem; line-height: 1.85; color: var(--text-subtle); margin-top: 24px; max-width: 58ch; }
 .company-description + .company-description { margin-top: 12px; }
-.company-disciplines { list-style: none; padding: 0; margin: 24px 0 30px; display: flex; flex-wrap: wrap; gap: 10px 20px; }
-.company-disciplines li { font-size: .875rem; color: var(--text-subtle); }
-.company-contact .company-facts { margin: 0; gap: 16px; border-top: 0; padding-top: 8px; }
+.company-contact .company-facts { margin: 32px 0 0; gap: 16px; border-top: 0; padding-top: 0; }
 .company-contact .company-facts div { grid-template-columns: 110px minmax(0, 1fr); gap: 18px; }
 .company-contact .company-facts dt { font-size: .875rem; }
 .company-contact .company-facts dd { font-size: 1rem; }
@@ -19,7 +18,7 @@
 .inquiry-form .form-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
 .inquiry-form label { display: block; font-size: .875rem; line-height: 1.6; color: #c7d4df; margin-bottom: 20px; min-width: 0; }
 .inquiry-form input, .inquiry-form select, .inquiry-form textarea { display: block; width: 100%; min-width: 0; min-height: 50px; font-size: 1rem; line-height: 1.5; padding: 12px; margin-top: 9px; border: 1px solid #465966; border-radius: 0; background: #0b1117; color: #eef3f7; transition: border-color .4s ease, background-color .4s ease, box-shadow .4s ease; }
-.inquiry-form input::placeholder, .inquiry-form textarea::placeholder { color: #7e8c99; opacity: 1; }
+.inquiry-form input::placeholder, .inquiry-form textarea::placeholder { color: #4c5b68; opacity: 1; }
 .inquiry-form input:focus, .inquiry-form select:focus, .inquiry-form textarea:focus { border-color: var(--accent); background: #15212d; box-shadow: 0 0 0 2px #b8dcf22b; }
 .inquiry-form textarea { min-height: 142px; resize: vertical; }
 .inquiry-form .select-field { display: block; position: relative; margin-top: 9px; }
