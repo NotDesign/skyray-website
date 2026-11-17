@@ -1,0 +1,20 @@
+/* A restrained corner scale softens framed content without rounding the layout. */
+:root {
+  --radius-control: 6px;
+  --radius-media: 8px;
+  --radius-panel: 12px;
+}
+
+.feature-image, .hero-small-art, .project-image, .comparison,
+.case-artwork-open, .studio-photo img {
+  border-radius: var(--radius-media);
+}
+.hero-small-art, .case-artwork-open { overflow: hidden; }
+.company-map { border-radius: var(--radius-media); overflow: hidden; }
+.company-inquiry { border-radius: var(--radius-panel); }
+.inquiry-form input, .inquiry-form select, .inquiry-form textarea,
+.work-search, .solid-button, .viewer-mode, .asset-strip button {
+  border-radius: var(--radius-control);
+}
+.project-dialog, .brief-dialog { border-radius: var(--radius-panel) !important; }
+.search-clear { border-radius: 0 var(--radius-control) var(--radius-control) 0; }

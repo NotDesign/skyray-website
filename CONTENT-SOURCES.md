@@ -12,3 +12,5 @@ https://www.104.com.tw/company/1a2x6bmmas
 The website paraphrases the company introduction. No unpublished email address or telephone number has been inferred. The contact brief downloads locally; it is not a submission service.
 
 Owner clarification on 2026-11-17: game production and system development are core services and should each appear in the studio introduction. The bilingual hero, service accordion, company service list and brief options now state both explicitly. These service statements do not imply that existing artwork-only portfolio entries represent complete software deliveries.
+
+Owner instructions on 2026-11-17: put company information and Google Maps on the left, and an inquiry form on the right. Include contact name, email and optional mobile/company fields. The owner will provide the email recipient later; the form remains explicitly local-download-only until a delivery destination is supplied. The map lookup uses the building address 桃園市桃園區同德六街89號 while the displayed office address keeps the exact requested floor/unit wording.

@@ -4,4 +4,6 @@ import Home from "../app/page";
 import "../app/globals.css";
 import "../app/readability.css";
 import "../app/portfolio.css";
+import "../app/contact.css";
+import "../app/surfaces.css";
 createRoot(document.getElementById("root")!).render(<StrictMode><Home portfolioPage={document.body.dataset.page === "portfolio"} /></StrictMode>);

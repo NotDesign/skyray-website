@@ -360,9 +360,9 @@ html[data-motion=on] [data-slot=dialog-content], html[data-motion=on] [data-slot
 }
 
 /* Horizontal reveals retain the shared fade, focus and reduced-motion behavior. */
-.reveal-ready .motion-enabled [data-reveal][data-reveal-direction=left]:not(.is-visible):not(:focus-within) { translate: -36px 0; }
-.reveal-ready .motion-enabled [data-reveal][data-reveal-direction=right]:not(.is-visible):not(:focus-within) { translate: 36px 0; }
+.reveal-ready .motion-enabled [data-reveal][data-reveal-direction=left]:not(.is-visible):not(:focus-within) { translate: -24px 0; }
+.reveal-ready .motion-enabled [data-reveal][data-reveal-direction=right]:not(.is-visible):not(:focus-within) { translate: 24px 0; }
 @media (max-width: 760px) {
-  .reveal-ready .motion-enabled [data-reveal][data-reveal-direction=left]:not(.is-visible):not(:focus-within) { translate: -20px 0; }
-  .reveal-ready .motion-enabled [data-reveal][data-reveal-direction=right]:not(.is-visible):not(:focus-within) { translate: 20px 0; }
+  .reveal-ready .motion-enabled [data-reveal][data-reveal-direction=left]:not(.is-visible):not(:focus-within) { translate: -16px 0; }
+  .reveal-ready .motion-enabled [data-reveal][data-reveal-direction=right]:not(.is-visible):not(:focus-within) { translate: 16px 0; }
 }
