@@ -1,6 +1,4 @@
 /* The archive uses consistent frames; each project opens into its complete series. */
-.nav a[aria-current=page] { position: relative; color: var(--accent); }
-.nav a[aria-current=page]::after { content: ""; position: absolute; height: 1px; background: currentColor; left: 0; right: 0; bottom: 4px; }
 .portfolio-page { max-width: 1800px; margin: 0 auto; padding: 38px 4% 80px; }
 .portfolio-breadcrumb { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; color: var(--text-subtle); font-size: .875rem; margin-bottom: 44px; }
 .portfolio-breadcrumb a { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; transition: color .4s ease; }
