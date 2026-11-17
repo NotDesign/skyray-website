@@ -4,16 +4,12 @@
 .company-description { font-size: 1rem; line-height: 1.85; color: var(--text-subtle); margin-top: 20px; max-width: 58ch; }
 .company-description + .company-description { margin-top: 12px; }
 .company-disciplines { list-style: none; padding: 0; margin: 24px 0 30px; display: flex; flex-wrap: wrap; gap: 10px 20px; }
-.company-disciplines li { font-size: .875rem; color: var(--accent); border-bottom: 1px solid #344a5a; padding-bottom: 5px; }
-.company-contact .company-facts { margin: 0; gap: 16px; border-top: 1px solid var(--border); padding-top: 24px; }
+.company-disciplines li { font-size: .875rem; color: var(--text-subtle); }
+.company-contact .company-facts { margin: 0; gap: 16px; border-top: 0; padding-top: 8px; }
 .company-contact .company-facts div { grid-template-columns: 110px minmax(0, 1fr); gap: 18px; }
 .company-contact .company-facts dt { font-size: .875rem; }
 .company-contact .company-facts dd { font-size: 1rem; }
 .company-map { margin-top: 24px; border: 1px solid var(--border); background: #111820; }
-.company-map-heading { min-height: 52px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 16px; padding: 4px 16px; font-size: .875rem; }
-.company-map-heading > span, .company-map-heading a { display: inline-flex; align-items: center; gap: 8px; }
-.company-map-heading a { min-height: 44px; color: var(--accent); transition: color .4s ease; }
-.company-map-heading a:hover { color: #fff; }
 .company-map iframe { display: block; width: 100%; height: 252px; border: 0; background: #172028; }
 .company-careers { margin-top: 14px; color: var(--accent); }
 .company-inquiry { background: #101820; border: 1px solid #30414e; padding: clamp(24px, 2.4vw, 40px); }
@@ -23,14 +19,13 @@
 .inquiry-form .form-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
 .inquiry-form label { display: block; font-size: .875rem; line-height: 1.6; color: #c7d4df; margin-bottom: 20px; min-width: 0; }
 .inquiry-form input, .inquiry-form select, .inquiry-form textarea { display: block; width: 100%; min-width: 0; min-height: 50px; font-size: 1rem; line-height: 1.5; padding: 12px; margin-top: 9px; border: 1px solid #465966; border-radius: 0; background: #0b1117; color: #eef3f7; transition: border-color .4s ease, background-color .4s ease, box-shadow .4s ease; }
-.inquiry-form input::placeholder, .inquiry-form textarea::placeholder { color: #a0b0bf; }
+.inquiry-form input::placeholder, .inquiry-form textarea::placeholder { color: #7e8c99; opacity: 1; }
 .inquiry-form input:focus, .inquiry-form select:focus, .inquiry-form textarea:focus { border-color: var(--accent); background: #15212d; box-shadow: 0 0 0 2px #b8dcf22b; }
 .inquiry-form textarea { min-height: 142px; resize: vertical; }
 .inquiry-form .select-field { display: block; position: relative; margin-top: 9px; }
 .inquiry-form .select-field select { appearance: none; -webkit-appearance: none; margin-top: 0; padding-right: 52px; }
 .inquiry-form .select-field > svg { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--text-subtle); transition: color .4s ease; }
 .inquiry-form .select-field:focus-within > svg { color: var(--accent); }
-.inquiry-note { font-size: .875rem; line-height: 1.7; color: var(--text-subtle); margin: 0 0 20px; }
 .inquiry-form .solid-button { min-height: 52px; font-size: 1rem; }
 .inquiry-form .form-status { color: var(--accent); font-size: .875rem; line-height: 1.7; margin-top: 16px; }
 @media (max-width: 960px) { .company-contact { grid-template-columns: 1fr; gap: 36px; } }

@@ -1,9 +1,8 @@
-import { useId, useState } from "react";
+import { useState } from "react";
 import { Check, ChevronDown, Download } from "lucide-react";
 
 export default function InquiryForm({ zh, initialType = "3D & Game Art" }: { zh: boolean; initialType?: string }) {
   const t = (en: string, cn: string) => zh ? cn : en;
-  const noteId = useId();
   const [downloaded, setDownloaded] = useState(false);
   function downloadInquiry(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -15,7 +14,7 @@ export default function InquiryForm({ zh, initialType = "3D & Game Art" }: { zh:
     setTimeout(() => URL.revokeObjectURL(url), 1000);
     setDownloaded(true);
   }
-  return <form className="inquiry-form" onSubmit={downloadInquiry} onChange={() => setDownloaded(false)} aria-describedby={noteId}>
+  return <form className="inquiry-form" onSubmit={downloadInquiry} onChange={() => setDownloaded(false)}>
     <div className="form-row">
       <label>{t("Contact name", "聯絡人")}<input name="name" autoComplete="name" required maxLength={100} placeholder={t("Your name", "怎麼稱呼你？")}/></label>
       <label>{t("Email", "電郵")}<input name="email" type="email" autoComplete="email" required maxLength={200} placeholder="you@company.com"/></label>
@@ -32,8 +31,7 @@ export default function InquiryForm({ zh, initialType = "3D & Game Art" }: { zh:
       <option value="Multidisciplinary">{t("A little of everything", "跨領域合作")}</option>
     </select><ChevronDown size={20} aria-hidden="true"/></span></label>
     <label>{t("Tell us about your project", "簡單說說你的需求")}<textarea name="message" rows={4} required maxLength={5000} placeholder={t("What would you like to create? Share your goals, timeline or ideas.", "想製作什麼？可以先說明目標、預計時程或目前的想法。")}/></label>
-    <p className="inquiry-note" id={noteId}>{t("Download a copy of your inquiry. Email submission is not available yet; nothing is sent to Skyray.", "填寫後可下載詢問內容。目前尚未開放電郵寄送，資料不會傳送給 Skyray。")}</p>
     <button className="solid-button" type="submit">{downloaded ? <Check size={18}/> : <Download size={18}/>} {t("Download inquiry", "下載詢問內容")}</button>
-    {downloaded && <p className="form-status" role="status">{t("Downloaded to your device. Your inquiry has not been sent.", "已下載至你的裝置，尚未寄送詢問。")}</p>}
+    {downloaded && <p className="form-status" role="status">{t("Your inquiry has been downloaded.", "詢問內容已下載。")}</p>}
   </form>;
 }

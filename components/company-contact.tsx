@@ -1,8 +1,7 @@
-import { ArrowUpRight, MapPin } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import InquiryForm from "./inquiry-form";
 
 const mapQuery = encodeURIComponent("桃園市桃園區同德六街89號");
-const mapUrl = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
 
 export default function CompanyContact({ zh }: { zh: boolean }) {
   const t = (en: string, cn: string) => zh ? cn : en;
@@ -18,7 +17,6 @@ export default function CompanyContact({ zh }: { zh: boolean }) {
       </ul>
       <dl className="company-facts"><div><dt>{t("Taiwan branch", "台灣據點")}</dt><dd>{t("Established in 2022", "2022 年設立")}</dd></div><div><dt>{t("Office", "公司地址")}</dt><dd><address>桃園區同德六街89號4樓之A</address></dd></div></dl>
       <div className="company-map">
-        <div className="company-map-heading"><span><MapPin size={18}/>{t("Find us in Taoyuan", "我們在桃園")}</span><a href={mapUrl} target="_blank" rel="noopener noreferrer">{t("Google Maps", "開啟地圖")}<ArrowUpRight size={16}/></a></div>
         <iframe title={t("Skyray Taiwan office on Google Maps", "Skyray 台灣辦公室 Google 地圖")} src={`https://www.google.com/maps?q=${mapQuery}&output=embed`} loading="lazy" referrerPolicy="no-referrer-when-downgrade" allowFullScreen/>
       </div>
       <a className="line-link company-careers" href="https://www.104.com.tw/company/1a2x6bmmas" target="_blank" rel="noopener noreferrer">{t("Join our team", "加入團隊")}<ArrowUpRight size={16}/></a>
