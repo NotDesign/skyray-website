@@ -10,3 +10,5 @@ https://www.104.com.tw/company/1a2x6bmmas
 - The displayed office address follows the site owner's instruction exactly: 桃園區同德六街89號4樓之A
 
 The website paraphrases the company introduction. No unpublished email address or telephone number has been inferred. The contact brief downloads locally; it is not a submission service.
+
+Owner clarification on 2026-11-17: game production and system development are core services and should each appear in the studio introduction. The bilingual hero, service accordion, company service list and brief options now state both explicitly. These service statements do not imply that existing artwork-only portfolio entries represent complete software deliveries.

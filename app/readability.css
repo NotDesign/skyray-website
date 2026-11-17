@@ -61,9 +61,6 @@ body { font-size: var(--text-body); line-height: 1.65; }
 .nav > :is(a, button):is(:hover, :focus-visible, [aria-current=page]) { color: var(--accent); }
 .nav > :is(a, button):is(:hover, :focus-visible, [aria-current=page])::after { opacity: 1; transform: scaleX(1); }
 .header .language { color: #d7e3ec; margin: 0; flex-shrink: 0; }
-.header .motion-toggle { width: 44px; height: 44px; margin: 0; color: var(--text-subtle); }
-.header .motion-toggle svg { width: 18px; height: 18px; }
-.header .motion-toggle:hover, .header .motion-toggle[aria-pressed=true] { color: var(--accent); }
 .header .menu-toggle { width: 44px; height: 44px; flex-shrink: 0; }
 
 .line-link,
@@ -220,7 +217,7 @@ body { font-size: var(--text-body); line-height: 1.65; }
 @media (max-width: 960px) {
   .header { gap: 10px; }
   .header-studio { display: none; }
-  .header .motion-toggle { margin-left: auto; }
+  .header .language { margin-left: auto; }
   .header .menu-toggle { display: grid; place-items: center; }
   .nav:not(.open) { display: none; }
   .nav.open {
@@ -336,11 +333,11 @@ body { font-size: var(--text-body); line-height: 1.65; }
 .expertise-item > button:hover { color: var(--accent); }
 
 /* Feedback stays restrained: short press, smooth state changes, clear focus. */
-.filter-group button, .hero-tabs button, .language, .motion-toggle, .menu-toggle,
+.filter-group button, .hero-tabs button, .language, .menu-toggle,
 .viewer-mode, .viewer-project-nav button, .solid-button, [data-slot=dialog-close] {
   transition: color .4s ease, background-color .4s ease, border-color .4s ease, opacity .3s ease, scale .16s ease;
 }
-.filter-group button:active, .hero-tabs button:active, .language:active, .motion-toggle:active,
+.filter-group button:active, .hero-tabs button:active, .language:active,
 .menu-toggle:active, .viewer-mode:active, .viewer-project-nav button:active,
 .solid-button:active, [data-slot=dialog-close]:active { scale: .96; }
 .asset-strip button { transition: opacity .3s ease, border-color .4s ease, scale .16s ease; }
@@ -360,4 +357,12 @@ html[data-motion=on] [data-slot=dialog-content], html[data-motion=on] [data-slot
 @media (prefers-reduced-motion: reduce) {
   .expertise-panel, .expertise-detail, .expertise-toggle-icon::after, .header .nav { transition: none !important; }
   .viewer-art > img, .viewer-info, .form-status { animation: none !important; }
+}
+
+/* Horizontal reveals retain the shared fade, focus and reduced-motion behavior. */
+.reveal-ready .motion-enabled [data-reveal][data-reveal-direction=left]:not(.is-visible):not(:focus-within) { translate: -36px 0; }
+.reveal-ready .motion-enabled [data-reveal][data-reveal-direction=right]:not(.is-visible):not(:focus-within) { translate: 36px 0; }
+@media (max-width: 760px) {
+  .reveal-ready .motion-enabled [data-reveal][data-reveal-direction=left]:not(.is-visible):not(:focus-within) { translate: -20px 0; }
+  .reveal-ready .motion-enabled [data-reveal][data-reveal-direction=right]:not(.is-visible):not(:focus-within) { translate: 20px 0; }
 }

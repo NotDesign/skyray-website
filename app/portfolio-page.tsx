@@ -46,7 +46,7 @@ export default function PortfolioPage({ zh, filter, query, setFilter, setQuery, 
     const next = collection[(position + 1) % collection.length];
     return <article className="portfolio-page case-page">
       <nav className="portfolio-breadcrumb" aria-label={t("Breadcrumb", "所在位置")}><a href={collectionUrl}><ArrowLeft size={16}/>{t("All work", "作品集")}</a><span aria-hidden="true">/</span><span aria-current="page">{project.name}</span></nav>
-      <header className="case-heading" data-reveal>
+      <header className="case-heading" data-reveal data-reveal-direction="left">
         <div><span className="mono">{String(projectIndex + 1).padStart(2, "0")} / {discipline.en}</span><h1>{project.name}</h1></div>
         <div className="case-summary"><p>{t(project.en, project.zh)}</p><ul className="case-tags">{project.tags.map(tag => <li key={tag}>{tag}</li>)}</ul><span className="mono">{project.assets.length} {t("IMAGES IN THIS PROJECT", "張作品圖・完整系列")}</span></div>
       </header>
@@ -72,7 +72,7 @@ export default function PortfolioPage({ zh, filter, query, setFilter, setQuery, 
 
   return <div className="portfolio-page">
     <nav className="portfolio-breadcrumb" aria-label={t("Breadcrumb", "所在位置")}><a href={import.meta.env.BASE_URL}>{t("Home", "首頁")}</a><span aria-hidden="true">/</span><span aria-current="page">{t("Portfolio", "作品集")}</span></nav>
-    <header className="portfolio-heading" data-reveal>
+    <header className="portfolio-heading" data-reveal data-reveal-direction="left">
       <div><span className="mono">THE COMPLETE COLLECTION</span><h1>WORK<span className="outline">S</span><sup>{projects.length}</sup></h1></div>
       <div><p>{t("Every project, a world of its own.", "每個專案，都有自己的世界。")}</p><p>{t("Explore the full series — from characters and game worlds to digital experiences and brand identities.", "從角色與遊戲世界，到網站與品牌視覺。走進每個專案，完整看見創作的不同面向。")}</p><span className="mono">{projects.length} PROJECTS / {assetCount} IMAGES / {categories.length - 1} DISCIPLINES</span></div>
     </header>
@@ -82,7 +82,7 @@ export default function PortfolioPage({ zh, filter, query, setFilter, setQuery, 
         <label className="work-search"><Search size={20} aria-hidden="true"/><input type="search" value={query} onChange={e => updateCollection(filter, e.target.value)} aria-label={t("Search projects", "搜尋作品")} placeholder={t("Search name or discipline", "搜尋專案、類型或關鍵字")}/>{query && <button className="search-clear" aria-label={t("Clear search", "清除搜尋")} onClick={() => updateCollection(filter, "")}><X size={18}/></button>}</label>
       </div>
       <div className="results-label mono" role="status" aria-live="polite"><span>{filtered.length} / {projects.length} {t("PROJECTS", "組專案")}</span><span>{t("OPEN A PROJECT. EXPLORE THE WHOLE STORY.", "選擇專案，瀏覽完整系列。")}</span></div>
-      <div className="portfolio-grid" key={filter}>{filtered.map(p => <PortfolioCard key={p.id} project={p} index={p.index} zh={zh} category={filter} query={query}/>)}</div>
+      <div className="portfolio-grid" key={filter}>{filtered.map((p, position) => <PortfolioCard key={p.id} project={p} index={p.index} zh={zh} category={filter} query={query} revealDirection={position % 2 === 0 ? "left" : "right"}/>)}</div>
       {filtered.length === 0 && <div className="no-results"><p>{t("No matching projects. Try another keyword or category.", "沒有符合的專案，試試其他關鍵字或分類。")}</p><button className="line-link" onClick={() => updateCollection("all", "")}>{t("Show all projects", "顯示全部作品")}<ArrowRight size={18}/></button></div>}
     </section>
     <div className="portfolio-outro" data-reveal><p>{t("What will we create next?", "下一個世界，從你的想法開始。")}</p><a className="line-link" href={`${import.meta.env.BASE_URL}#contact`}>{t("Let’s talk", "聊聊合作想法")}<ArrowUpRight size={18}/></a></div>

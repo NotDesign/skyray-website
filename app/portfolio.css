@@ -31,6 +31,7 @@
 .portfolio-card p { color: var(--text-subtle); font-size: 1rem; line-height: 1.75; margin: 10px 0 0; }
 .selected-work .section-kicker a { display: inline-flex; align-items: center; min-height: 44px; gap: 14px; color: var(--accent); transition: color .4s ease; }
 .selected-work .work-heading h2 { font-size: clamp(3.5rem, 8vw, 8rem); }
+.selected-work .archive-foot { margin-top: 48px; }
 .portfolio-outro { margin-top: 88px; border-top: 1px solid #334451; padding-top: 32px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .portfolio-outro p { font-size: clamp(1.25rem, 2vw, 2rem); }
 .case-heading { display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: end; margin-bottom: 48px; }
@@ -65,6 +66,7 @@ html[data-motion=on] .case-artwork-open { animation: media-reveal .4s ease both;
   .portfolio-heading, .case-heading { gap: 32px; }
 }
 @media (max-width: 760px) {
+  .selected-work .archive-foot { margin-top: 32px; }
   .portfolio-page { padding: 20px 6% 56px; }
   .portfolio-breadcrumb { margin-bottom: 28px; }
   .portfolio-heading, .case-heading { grid-template-columns: 1fr; gap: 28px; margin-bottom: 32px; }
