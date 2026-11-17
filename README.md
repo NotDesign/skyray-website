@@ -20,6 +20,16 @@ npm run preview
 
 The static site is generated in `dist/`. The default base path is `/skyray-website/`; set `PAGES_BASE_PATH=/` to deploy at a domain root.
 
+## Pages and project links
+
+- `/skyray-website/`: studio introduction, three featured artworks, six selected projects and the existing home-page loop.
+- `/skyray-website/portfolio/`: the complete collection with all 27 projects, category filters and keyword search.
+- `/skyray-website/portfolio/?project=darley`: a project page showing every artwork in the series at its original proportions, section links, detail enlargement and the next project.
+
+Vite builds both HTML entry points, so portfolio links and project query URLs can be opened directly or refreshed on GitHub Pages. Category (`category`) and search (`q`) parameters are kept in project links and the return link. Browser Back also returns to the previous collection. Unknown project identifiers show a recovery link to the portfolio. Both pages share language, motion preferences, header and the local-only project brief dialog. The portfolio uses a regular footer for browsing the collection; the existing looping experience remains on the studio homepage.
+
+Add or update projects in `lib/portfolio.ts`. The homepage, portfolio cards, category totals and complete series pages all read that same catalog. Only supplied artwork and descriptions are presented; no client results, dates or credits are invented.
+
 ## GitHub Pages
 
 Set repository Settings → Pages → Source to GitHub Actions. The included workflow builds and publishes pushes to `main`.

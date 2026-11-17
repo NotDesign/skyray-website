@@ -3,4 +3,5 @@ import { createRoot } from "react-dom/client";
 import Home from "../app/page";
 import "../app/globals.css";
 import "../app/readability.css";
-createRoot(document.getElementById("root")!).render(<StrictMode><Home /></StrictMode>);
+import "../app/portfolio.css";
+createRoot(document.getElementById("root")!).render(<StrictMode><Home portfolioPage={document.body.dataset.page === "portfolio"} /></StrictMode>);
