@@ -26,5 +26,5 @@ export function filterProjects(category: string, query: string) {
     const discipline = categories.find(c => c.id === project.category);
     return (category === "all" || project.category === category) &&
       `${project.name} ${project.en} ${project.zh} ${project.tags.join(" ")} ${discipline?.en} ${discipline?.zh}`.toLocaleLowerCase().includes(needle);
-  });
+  }).sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)));
 }

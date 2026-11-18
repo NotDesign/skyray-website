@@ -75,3 +75,7 @@ Company contact area: a two-column company profile/map and inquiry form, stackin
 Framed surfaces use a restrained corner scale: 6px for form/search controls, 8px for images and the map, and 12px for the inquiry panel and dialogs. Section rules and typography retain their alignment; circular cursor and viewer controls keep their circular shape.
 
 Studio layout: the bilingual introduction sits beneath the studio photo and caption, aligned to the photo’s left edge; the service accordion remains in the right column. The company panel uses the existing SKYRAY logo above the legal name, omits repeated service labels, and uses 16/24/32px spacing between related groups. Placeholder text is deliberately subdued at #4c5b68 in both inline and dialog inquiry forms; entered values retain #eef3f7.
+
+The fixed header and mobile menu share the sky-blue surface (#b8dcf2), with dark navigation text, logo and focus indicators. Clickable artwork in the home gallery, selected works, portfolio and case gallery scales to 1.045 on hover/focus over 450 ms, contained within the existing rounded frame. Captions remain stationary. Touch has no hover zoom; reduced motion disables scale transitions.
+
+Poker Mars is featured first in the collection and home selection, with three owner-supplied 1080 × 1350 campaign/interface images. The archive now contains 28 projects and 45 images; home project/category totals derive from the portfolio data. Existing project IDs and viewer indices remain stable.

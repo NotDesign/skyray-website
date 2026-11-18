@@ -18,3 +18,33 @@
 }
 .project-dialog, .brief-dialog { border-radius: var(--radius-panel) !important; }
 .search-clear { border-radius: 0 var(--radius-control) var(--radius-control) 0; }
+
+
+/* Artwork moves inside its frame; captions and the card grid stay anchored. */
+.feature-image img, .hero-small-art img, .project-image img, .case-artwork-open img {
+  scale: 1;
+  transform-origin: center;
+  transition: scale .45s cubic-bezier(.2,.65,.3,1), filter .45s ease;
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .motion-enabled .feature-image:hover img,
+  .motion-enabled .hero-secondary:hover .hero-small-art img,
+  .motion-enabled .project-card:hover .project-image img,
+  .motion-enabled .case-artwork-open:hover img { scale: 1.045; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .motion-enabled .feature-image:focus-visible img,
+  .motion-enabled .hero-secondary:focus-visible .hero-small-art img,
+  .motion-enabled .project-card:focus-visible .project-image img,
+  .motion-enabled .case-artwork-open:focus-visible img { scale: 1.045; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .feature-image img, .hero-small-art img, .project-image img, .case-artwork-open img {
+    transition: none;
+  }
+}
+/* Keep the circular pointer visible against the pale-blue navigation surface. */
+.site:has(.header:hover) .context-cursor:not([data-kind=contact]):not([data-kind=control]) .cursor-shape {
+  border-color: #143a52;
+  background: #143a5214;
+}

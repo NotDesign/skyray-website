@@ -83,10 +83,10 @@ export default function Home({ portfolioPage = false }: { portfolioPage?: boolea
       {portfolioPage ? <PortfolioPage zh={zh} filter={filter} query={query} setFilter={setFilter} setQuery={setQuery} openProject={openProject}/> : <>
       <Hero zh={zh} motionOn={motionOn} heroView={heroView} setHeroView={setHeroView} openProject={openProject}/>
       <section id="work" className="work section-pad selected-work">
-        <div className="section-kicker mono" data-reveal><span>01 / SELECTED WORK</span><a href={portfolioPath}>{t("EXPLORE ALL 27 PROJECTS", "探索全部 27 組專案")} <ArrowRight size={16}/></a></div>
+        <div className="section-kicker mono" data-reveal><span>01 / SELECTED WORK</span><a href={portfolioPath}>{t(`EXPLORE ALL ${projects.length} PROJECTS`, `探索全部 ${projects.length} 組專案`)} <ArrowRight size={16}/></a></div>
         <div className="work-heading" data-reveal><h2>SELECT<span className="outline">ED</span></h2><p>{t("Different media. A shared attention to craft.", "不同媒介，同樣專注。")}<br/><span>{t("A selection from the studio. Discover every series in our portfolio.", "先從精選作品開始，再走進作品集，探索每個完整系列。")}</span></p></div>
-        <div className="portfolio-grid">{[3,5,7,8,13,14].map(index => <PortfolioCard key={projects[index].id} project={projects[index]} index={index} zh={zh}/>)}</div>
-        <div className="archive-foot" data-reveal><span className="mono">27 PROJECTS / 6 DISCIPLINES</span><a href={portfolioPath} className="line-link">{t("Explore the complete portfolio", "瀏覽完整作品集")}<ArrowRight size={20}/></a></div>
+        <div className="portfolio-grid">{["poker-mars","wong","donkey","five","trident","shy"].map(id => projects.findIndex(project => project.id === id)).map(index => <PortfolioCard key={projects[index].id} project={projects[index]} index={index} zh={zh}/>)}</div>
+        <div className="archive-foot" data-reveal><span className="mono">{projects.length} PROJECTS / {categories.length - 1} DISCIPLINES</span><a href={portfolioPath} className="line-link">{t("Explore the complete portfolio", "瀏覽完整作品集")}<ArrowRight size={20}/></a></div>
       </section>
       <section id="approach" className="approach section-pad">
         <div className="section-kicker mono" data-reveal><span>02 / A CLOSER LOOK</span><span>WORLD BUILDING / LIGHT & ATMOSPHERE</span></div>
