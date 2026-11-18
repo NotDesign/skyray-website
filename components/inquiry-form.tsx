@@ -14,7 +14,7 @@ export default function InquiryForm({ zh, initialType = "3D & Game Art" }: { zh:
     setTimeout(() => URL.revokeObjectURL(url), 1000);
     setDownloaded(true);
   }
-  return <form className="inquiry-form" onSubmit={downloadInquiry} onChange={() => setDownloaded(false)}>
+  return <form className="inquiry-form" data-update-safe={downloaded} onSubmit={downloadInquiry} onChange={() => setDownloaded(false)}>
     <div className="form-row">
       <label>{t("Contact name", "聯絡人")}<input name="name" autoComplete="name" required maxLength={100} placeholder={t("Your name", "怎麼稱呼你？")}/></label>
       <label>{t("Email", "電郵")}<input name="email" type="email" autoComplete="email" required maxLength={200} placeholder="you@company.com"/></label>

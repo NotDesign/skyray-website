@@ -85,3 +85,11 @@ Poker Mars is featured in the collection and home selection. Home project/catego
 The portfolio includes 29 projects and 51 source images. Poker Mars Website presents five owner-supplied desktop pages in CSS laptop/browser frames; the separate Poker Mars project includes three campaign posters and a mobile lobby in a phone frame. All frames open the complete, full-resolution source in the existing artwork viewer. `components/website-mockup.tsx` and `app/mockups.css` provide reusable frames without repainting screenshot text. Original PNGs and SHA-256 manifests are preserved in the workspace asset archives.
 
 Website captures open in a full-width, vertically scrollable preview. The image keeps its original aspect ratio, fills the viewer without horizontal panning and resets to the top when switching pages. A View full overview toggle fits the entire page when needed; project arrows stay in the bottom bar so they do not cover the webpage. Other artwork keeps its existing fit/detail behavior.
+
+## Automatic releases
+
+Production builds emit a content-based `version.json` covering code and public assets. Visible tabs check on load, every 60 seconds, and when returning to the tab or reconnecting. Version checks bypass browser/CDN caches; a changed release uses a versioned navigation URL, then restores the clean project URL and reading position. A repeated stale target is suppressed to prevent refresh loops. Network failures leave the working page intact.
+
+Automatic navigation waits while an inquiry has unfinished content, an input is focused, a dialog/menu is open, or the visitor is actively scrolling/typing. Downloading the inquiry marks it safe until its next edit. No inquiry content is stored or sent by the updater. Existing tabs from before this feature must load it once; subsequent releases are detected automatically. Run `npm run test:update` for lifecycle/error/draft regression checks.
+
+The gray-blue header slides away after downward scrolling and returns when scrolling upward, at the page top, or when reached by keyboard. Open mobile navigation stays visible. The original pale-blue reading progress remains visible at the top edge while the header is hidden. Reduced-motion preferences disable the slide transition.

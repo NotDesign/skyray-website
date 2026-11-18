@@ -1,6 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import Home from "../app/page";
+import { startSiteUpdates } from "../lib/site-update";
 import "../app/globals.css";
 import "../app/readability.css";
 import "../app/portfolio.css";
@@ -8,3 +9,5 @@ import "../app/contact.css";
 import "../app/surfaces.css";
 import "../app/mockups.css";
 createRoot(document.getElementById("root")!).render(<StrictMode><Home portfolioPage={document.body.dataset.page === "portfolio"} /></StrictMode>);
+declare const __SITE_VERSION__: string;
+if (import.meta.env.PROD) startSiteUpdates(__SITE_VERSION__, import.meta.env.BASE_URL);
