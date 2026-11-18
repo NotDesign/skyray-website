@@ -49,8 +49,8 @@
     transition: none;
   }
 }
-/* Keep the circular pointer visible against the shaded blue navigation. */
+/* Keep the circular pointer visible against the gray navigation. */
 .site:has(.header:hover) .context-cursor:not([data-kind=contact]):not([data-kind=control]) .cursor-shape {
-  border-color: #c9e4f5;
-  background: #9ed3f214;
+  border-color: #e1e3e5;
+  background: #d4d6d814;
 }

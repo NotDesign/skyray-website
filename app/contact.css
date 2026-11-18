@@ -1,4 +1,4 @@
-.company-contact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 88px); align-items: start; margin-top: 72px; padding-top: 56px; border-top: 1px solid var(--border); }
+.company-contact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 88px); align-items: stretch; margin-top: 72px; padding-top: 56px; border-top: 1px solid var(--border); }
 .company-contact .company-name { margin: 24px 0 16px; }
 .company-name img { width: clamp(200px, 20vw, 300px); max-width: 100%; height: auto; }
 .company-contact .company-legal { font-size: 1rem; line-height: 1.8; }
@@ -8,12 +8,12 @@
 .company-contact .company-facts div { grid-template-columns: 110px minmax(0, 1fr); gap: 18px; }
 .company-contact .company-facts dt { font-size: .875rem; }
 .company-contact .company-facts dd { font-size: 1rem; }
-.company-map { margin-top: 24px; border: 1px solid var(--border); background: #111820; }
-.company-map iframe { display: block; width: 100%; height: 252px; border: 0; background: #172028; }
-.company-careers { margin-top: 14px; color: var(--accent); }
-.company-inquiry { background: #101820; border: 1px solid #30414e; padding: clamp(24px, 2.4vw, 40px); }
+.company-map { min-width: 0; border: 1px solid var(--border); background: #111820; }
+.company-map iframe { display: block; width: 100%; height: 100%; min-height: 320px; border: 0; background: #172028; }
+.company-careers { margin-top: 24px; color: var(--accent); }
+.company-inquiry { min-width: 0; background: #101820; border: 1px solid #30414e; padding: clamp(24px, 2.4vw, 40px); }
 .company-inquiry h3 { font-size: clamp(1.5rem, 2vw, 2rem); line-height: 1.45; margin: 14px 0 16px; letter-spacing: -.025em; }
-.company-inquiry-intro { font-size: 1rem; line-height: 1.8; color: var(--text-subtle); margin-bottom: 28px; }
+.contact-main .company-inquiry-intro { font-size: 1rem; line-height: 1.8; color: var(--text-subtle); margin-bottom: 28px; }
 .inquiry-form { margin: 0; }
 .inquiry-form .form-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
 .inquiry-form label { display: block; font-size: .875rem; line-height: 1.6; color: #c7d4df; margin-bottom: 20px; min-width: 0; }
@@ -27,8 +27,20 @@
 .inquiry-form .select-field:focus-within > svg { color: var(--accent); }
 .inquiry-form .solid-button { min-height: 52px; font-size: 1rem; }
 .inquiry-form .form-status { color: var(--accent); font-size: .875rem; line-height: 1.7; margin-top: 16px; }
-@media (max-width: 960px) { .company-contact { grid-template-columns: 1fr; gap: 36px; } }
+.contact .contact-main { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); align-items: center; gap: clamp(32px, 5vw, 80px); margin-top: 56px; }
+.contact-lead { min-width: 0; }
+.contact .contact-lead h2 { font-size: clamp(80px, 7.2vw, 128px); }
+.contact .contact-lead > p { max-width: 34ch; margin-bottom: 32px; }
+@media (max-width: 1100px) {
+  .contact .contact-main { grid-template-columns: 1fr; gap: 40px; }
+  .contact .contact-lead h2 { font-size: clamp(64px, 16vw, 120px); }
+}
+@media (max-width: 960px) {
+  .company-contact { grid-template-columns: 1fr; gap: 32px; }
+  .company-map iframe { min-height: 280px; }
+}
 @media (max-width: 540px) {
+  .contact .contact-main { margin-top: 32px; gap: 32px; }
   .company-contact { margin-top: 48px; padding-top: 36px; }
   .company-inquiry { padding: 22px 18px; }
   .inquiry-form .form-row { grid-template-columns: 1fr; gap: 0; }
