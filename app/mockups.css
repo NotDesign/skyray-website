@@ -1,0 +1,42 @@
+/* Original interface screenshots in reusable CSS device presentations. */
+.website-mockup{position:relative;isolation:isolate;width:100%;aspect-ratio:4/3;overflow:hidden;background:radial-gradient(ellipse at 70% 44%,#4c386344,transparent 58%),linear-gradient(145deg,#1c1c29,#0d0e16 75%);container-type:inline-size;text-align:left}
+.mockup-overline{position:absolute;left:7%;top:8%;display:flex;flex-direction:column;gap:6px;font-size:clamp(8px,2.4cqw,30px);font-weight:500;letter-spacing:.16em;color:#e2ddef}
+.mockup-overline>span{font-size:.48em;font-weight:400;letter-spacing:.2em;color:#9e94b4}
+.mockup-baseline{position:absolute;bottom:7%;left:7%;font-size:clamp(6px,1cqw,13px);letter-spacing:.2em;color:#9e94b4}
+.web-device-group{position:absolute;left:8%;top:25%;width:84%;filter:drop-shadow(0 20px 24px #0006)}
+.web-device{position:relative;padding:1%;border:1px solid #77708066;border-radius:10px;background:linear-gradient(135deg,#48434e,#18171e 32%,#34313d);box-shadow:0 1px 0 #ffffff22 inset}
+.web-camera{height:1.5cqw;display:grid;place-items:center}
+.web-camera i{width:.45cqw;height:.45cqw;background:#0b0b11;border-radius:50%;box-shadow:0 0 0 1px #54505c}
+.web-browser-bar{height:3cqw;display:flex;align-items:center;justify-content:space-between;padding:0 3%;font:400 clamp(5px,.85cqw,12px)/1 Arial,sans-serif;letter-spacing:.12em;color:#aca4bd;background:#191622;border-radius:3px 3px 0 0}
+.web-browser-dots{display:flex;gap:.5cqw}
+.web-browser-dots i{display:block;width:.5cqw;height:.5cqw;border-radius:50%;background:#746783}
+.web-screen{aspect-ratio:1.65;overflow:hidden;background:#080614;border-radius:0 0 3px 3px}
+.website-mockup .web-screen img{display:block;width:100%;max-width:none;height:auto;margin:0;object-fit:initial;transform-origin:center top}
+.web-laptop-base{position:relative;height:2.6cqw;width:114%;left:-7%;background:linear-gradient(#7b7682,#42404a 32%,#25242c 60%);border-radius:1px 1px 40% 40% / 1px 1px 90% 90%;box-shadow:0 1px 1px #c6bec766 inset}
+.web-laptop-base i{display:block;width:15%;height:28%;margin:auto;background:#25232c;border-radius:0 0 6px 6px;box-shadow:0 1px 0 #9c949e55}
+.mockup-composition .web-device-group{left:5%;top:27%;width:77%;transform:perspective(1100px) rotateY(8deg) rotateX(3deg) rotateZ(-3deg)}
+.web-device-floating{position:absolute;right:4%;bottom:12%;width:39%;padding:.6%;transform:rotate(5deg);box-shadow:0 16px 32px #0009}
+.web-device-floating .web-screen{aspect-ratio:.92}
+.web-device-floating .web-browser-bar{height:2cqw;font-size:.65cqw}
+.mockup-browser .web-device-group{top:18%;left:9%;width:82%}
+.mockup-browser .web-screen{aspect-ratio:1.6}
+.case-web-gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:36px 28px}
+.case-web-gallery .case-artwork:first-child{grid-column:1/-1}
+.case-web-gallery .case-artwork:first-child .website-mockup{aspect-ratio:16/11}
+.case-web-gallery .case-artwork:first-child .mockup-overline{top:7%;font-size:2.6cqw}
+.case-web-gallery .case-artwork:first-child .web-device-group{top:22%;left:16%;width:68%}
+.case-web-gallery .case-artwork:first-child .mockup-baseline{bottom:5%}
+.case-web-gallery .case-artwork:first-child .web-screen{aspect-ratio:1.7}
+.case-web-gallery .case-artwork figcaption{font-size:.95rem}
+.mockup-phone{aspect-ratio:4/3;background:radial-gradient(ellipse at 55% 50%,#58385b66,transparent 60%),#121119}
+.mockup-phone .web-device-group{left:32%;top:9%;width:36%;transform:perspective(1400px) rotateY(-10deg) rotateZ(4deg)}
+.mockup-phone .web-device{padding:2.2%;border:2px solid #7d7184;border-radius:4cqw;background:#111016;box-shadow:5px 3px 0 #4b424f,9px 6px 0 #15121c}
+.mockup-phone .web-screen{aspect-ratio:auto;border-radius:3.2cqw;overflow:hidden}
+.mockup-phone .mockup-overline{font-size:2cqw}
+@media(max-width:760px){
+  .case-web-gallery{grid-template-columns:1fr;gap:28px}
+  .case-web-gallery .case-artwork:first-child .website-mockup{aspect-ratio:4/3}
+  .case-web-gallery .case-artwork:first-child .web-device-group{top:27%;left:8%;width:84%}
+  .case-web-gallery .case-artwork:first-child .mockup-overline{top:8%;font-size:3.5cqw}
+  .case-web-gallery .case-artwork:first-child .mockup-baseline{bottom:7%}
+}

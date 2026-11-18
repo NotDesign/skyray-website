@@ -78,4 +78,8 @@ Studio layout: the bilingual introduction sits beneath the studio photo and capt
 
 The fixed header and mobile menu share the sky-blue surface (#b8dcf2), with dark navigation text, logo and focus indicators. Clickable artwork in the home gallery, selected works, portfolio and case gallery scales to 1.045 on hover/focus over 450 ms, contained within the existing rounded frame. Captions remain stationary. Touch has no hover zoom; reduced motion disables scale transitions.
 
-Poker Mars is featured first in the collection and home selection, with three owner-supplied 1080 × 1350 campaign/interface images. The archive now contains 28 projects and 45 images; home project/category totals derive from the portfolio data. Existing project IDs and viewer indices remain stable.
+Poker Mars is featured in the collection and home selection. Home project/category totals derive from the portfolio data. Existing project IDs and viewer indices remain stable.
+
+## Poker Mars interface presentations
+
+The portfolio includes 29 projects and 51 source images. Poker Mars Website presents five owner-supplied desktop pages in CSS laptop/browser frames; the separate Poker Mars project includes three campaign posters and a mobile lobby in a phone frame. All frames open the complete, full-resolution source in the existing artwork viewer. `components/website-mockup.tsx` and `app/mockups.css` provide reusable frames without repainting screenshot text. Original PNGs and SHA-256 manifests are preserved in the workspace asset archives.

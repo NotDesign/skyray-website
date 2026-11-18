@@ -6,4 +6,5 @@ import "../app/readability.css";
 import "../app/portfolio.css";
 import "../app/contact.css";
 import "../app/surfaces.css";
+import "../app/mockups.css";
 createRoot(document.getElementById("root")!).render(<StrictMode><Home portfolioPage={document.body.dataset.page === "portfolio"} /></StrictMode>);

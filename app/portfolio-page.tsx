@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { ArrowLeft, ArrowRight, ArrowUpRight, Search, X, Plus } from "lucide-react";
+import WebsiteMockup from "@/components/website-mockup";
 import PortfolioCard from "@/components/portfolio-card";
 import { categories, projects, assetCount } from "@/lib/portfolio";
 import { filterProjects, portfolioPath, portfolioUrl, readPortfolioState } from "@/lib/portfolio-navigation";
@@ -53,11 +54,11 @@ export default function PortfolioPage({ zh, filter, query, setFilter, setQuery, 
       {project.assets.length > 1 && <nav className="case-index" aria-label={t("Project sections", "專案內容")}>
         {project.assets.map((asset, index) => <a key={asset.src} href={`#artwork-${index + 1}`}><span className="mono">{String(index + 1).padStart(2, "0")}</span>{t(asset.label, asset.labelZh)}</a>)}
       </nav>}
-      <div className="case-gallery">
+      <div className={`case-gallery${project.presentation === "website" ? " case-web-gallery" : ""}`}>
         {project.assets.map((asset, index) => <figure key={asset.src} id={`artwork-${index + 1}`} className="case-artwork">
-          <figcaption><span><span className="mono">{String(index + 1).padStart(2, "0")}</span>{t(asset.label, asset.labelZh)}</span><button onClick={() => openProject(projectIndex, index)} className="line-link">{t("View details", "放大細節")}<Plus size={18}/></button></figcaption>
+          <figcaption><span><span className="mono">{String(index + 1).padStart(2, "0")}</span>{t(asset.label, asset.labelZh)}</span><button onClick={() => openProject(projectIndex, index)} className="line-link">{project.presentation === "website" ? t("Full page", "查看完整頁面") : t("View details", "放大細節")}<Plus size={18}/></button></figcaption>
           <button className="case-artwork-open" onClick={() => openProject(projectIndex, index)} data-cursor="VIEW" aria-label={`${t("Enlarge", "放大")} ${t(asset.label, asset.labelZh)}`}>
-            <img src={asset.src} width={asset.width} height={asset.height} alt={`${project.name} — ${t(asset.label, asset.labelZh)}`} loading={index === 0 ? "eager" : "lazy"} decoding="async" />
+            {project.presentation === "website" || asset.presentation === "phone" ? <WebsiteMockup zh={zh} asset={asset} laptop={project.presentation === "website" && index === 0} phone={asset.presentation === "phone"} eager={index === 0} /> : <img src={asset.src} width={asset.width} height={asset.height} alt={`${project.name} — ${t(asset.label, asset.labelZh)}`} loading={index === 0 ? "eager" : "lazy"} decoding="async" />}
           </button>
         </figure>)}
       </div>
