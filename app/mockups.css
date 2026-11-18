@@ -18,6 +18,8 @@
 .web-device-floating{position:absolute;right:4%;bottom:12%;width:39%;padding:.6%;transform:rotate(5deg);box-shadow:0 16px 32px #0009}
 .web-device-floating .web-screen{aspect-ratio:.92}
 .web-device-floating .web-browser-bar{height:2cqw;font-size:.65cqw}
+.mockup-browser{aspect-ratio:6/5}
+.mockup-browser .mockup-baseline{bottom:6%}
 .mockup-browser .web-device-group{top:18%;left:9%;width:82%}
 .mockup-browser .web-screen{aspect-ratio:1.6}
 .case-web-gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:36px 28px}

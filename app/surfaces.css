@@ -21,7 +21,8 @@
 
 
 /* Artwork moves inside its frame; captions and the card grid stay anchored. */
-.feature-image img, .hero-small-art img, .project-image img, .case-artwork-open img {
+.feature-image img, .hero-small-art img, .project-image > img, .case-artwork-open > img,
+.project-image > .website-mockup, .case-artwork-open > .website-mockup {
   scale: 1;
   transform-origin: center;
   transition: scale .45s cubic-bezier(.2,.65,.3,1), filter .45s ease;
@@ -29,22 +30,27 @@
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   .motion-enabled .feature-image:hover img,
   .motion-enabled .hero-secondary:hover .hero-small-art img,
-  .motion-enabled .project-card:hover .project-image img,
-  .motion-enabled .case-artwork-open:hover img { scale: 1.045; }
+  .motion-enabled .project-card:hover .project-image > img,
+  .motion-enabled .project-card:hover .project-image > .website-mockup,
+  .motion-enabled .case-artwork-open:hover > img,
+  .motion-enabled .case-artwork-open:hover > .website-mockup { scale: 1.045; }
 }
 @media (prefers-reduced-motion: no-preference) {
   .motion-enabled .feature-image:focus-visible img,
   .motion-enabled .hero-secondary:focus-visible .hero-small-art img,
-  .motion-enabled .project-card:focus-visible .project-image img,
-  .motion-enabled .case-artwork-open:focus-visible img { scale: 1.045; }
+  .motion-enabled .project-card:focus-visible .project-image > img,
+  .motion-enabled .project-card:focus-visible .project-image > .website-mockup,
+  .motion-enabled .case-artwork-open:focus-visible > img,
+  .motion-enabled .case-artwork-open:focus-visible > .website-mockup { scale: 1.045; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .feature-image img, .hero-small-art img, .project-image img, .case-artwork-open img {
+  .feature-image img, .hero-small-art img, .project-image > img, .case-artwork-open > img,
+.project-image > .website-mockup, .case-artwork-open > .website-mockup {
     transition: none;
   }
 }
-/* Keep the circular pointer visible against the pale-blue navigation surface. */
+/* Keep the circular pointer visible against the shaded blue navigation. */
 .site:has(.header:hover) .context-cursor:not([data-kind=contact]):not([data-kind=control]) .cursor-shape {
-  border-color: #143a52;
-  background: #143a5214;
+  border-color: #c9e4f5;
+  background: #9ed3f214;
 }

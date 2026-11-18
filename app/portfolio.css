@@ -49,7 +49,7 @@
 .case-artwork figcaption .line-link { flex-shrink: 0; color: var(--accent); }
 .case-artwork-open { width: 100%; display: block; background: #10171e; transition: background .4s ease; }
 .case-artwork-open img { display: block; max-width: 100%; width: auto; height: auto; margin: 0 auto; transition: filter .4s ease; }
-.case-artwork-open:hover img { filter: brightness(1.05); }
+.case-artwork-open:hover > img, .case-artwork-open:hover > .website-mockup { filter: brightness(1.05); }
 .case-next { display: flex; gap: 32px; justify-content: space-between; align-items: end; border-top: 1px solid #334451; margin-top: 88px; padding-top: 30px; }
 .case-next-project { max-width: 65%; }
 .case-next-project > span:last-child { display: flex; align-items: center; gap: 26px; font-size: clamp(1.5rem, 3vw, 3rem); margin-top: 10px; line-height: 1.2; transition: color .4s ease; }
