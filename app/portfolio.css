@@ -94,3 +94,12 @@ html[data-motion=on] .case-artwork-open { animation: media-reveal .4s ease both;
 @media (prefers-reduced-motion: reduce) {
   .portfolio-page, .case-artwork-open { animation: none !important; }
 }
+
+/* Long website captures open at viewport width, like browsing a real page. */
+.project-dialog.webpage-dialog { width: 98vw !important; height: 96dvh !important; }
+.project-dialog.webpage-dialog .viewer-art { margin-inline: 0; overscroll-behavior: contain; }
+.project-dialog.webpage-dialog .viewer-art.webpage-scroll { display: block; padding: 0; overflow-x: hidden; overflow-y: auto; }
+.project-dialog.webpage-dialog .webpage-scroll > img { display: block; width: 100%; min-width: 0; max-width: 100%; height: auto; max-height: none; margin: 0; }
+.project-dialog.webpage-dialog .viewer-project-nav button { top: auto; bottom: 10px; transform: none; width: 44px; height: 44px; }
+.project-dialog.webpage-dialog .viewer-project-nav button:first-of-type { left: calc(50% - 108px); }
+.project-dialog.webpage-dialog .viewer-project-nav button:last-of-type { right: calc(50% - 108px); }

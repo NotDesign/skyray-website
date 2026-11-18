@@ -2,18 +2,26 @@
 import { useEffect, useRef } from "react";
 
 export default function SiteEffects({ enabled, contentKey }: { enabled: boolean; contentKey: string }) {
+  const progressRef = useRef<HTMLDivElement>(null);
   const cursorRef = useRef<HTMLDivElement>(null);
   const pointerPosition = useRef<{ x: number; y: number } | null>(null);
   useEffect(() => {
+    const progress = progressRef.current;
     let scheduled = 0;
     const update = () => {
       scheduled = 0;
+      const distance = document.documentElement.scrollHeight - innerHeight;
+      const value = distance > 0 ? Math.min(1, Math.max(0, scrollY / distance)) : 0;
+      progress?.style.setProperty("--reading-progress", String(value));
       document.querySelector(".header")?.classList.toggle("has-scrolled", scrollY > 20);
     };
     const queue = () => { if (!scheduled) scheduled = requestAnimationFrame(update); };
+    const observer = new ResizeObserver(queue);
+    observer.observe(document.body);
+    window.addEventListener("resize", queue);
     window.addEventListener("scroll", queue, { passive: true });
     update();
-    return () => { cancelAnimationFrame(scheduled); window.removeEventListener("scroll", queue); };
+    return () => { cancelAnimationFrame(scheduled); observer.disconnect(); window.removeEventListener("resize", queue); window.removeEventListener("scroll", queue); };
   }, []);
   useEffect(() => {
     const elements = document.querySelectorAll<HTMLElement>("[data-reveal]");
@@ -168,5 +176,5 @@ export default function SiteEffects({ enabled, contentKey }: { enabled: boolean;
     };
   }, [enabled, contentKey]);
   useEffect(() => () => { document.documentElement.classList.remove("reveal-ready"); }, []);
-  return <><div ref={cursorRef} className="context-cursor" data-visible="false" aria-hidden="true"><div className="cursor-shape"><span/></div></div></>;
+  return <><div ref={progressRef} className="reading-progress" aria-hidden="true"/><div ref={cursorRef} className="context-cursor" data-visible="false" aria-hidden="true"><div className="cursor-shape"><span/></div></div></>;
 }
