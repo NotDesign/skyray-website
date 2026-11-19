@@ -18,7 +18,7 @@
 /* Fixed navigation shares one height token with content and anchor offsets. */
 :root{--header-height:88px}
 .site{padding-top:var(--header-height)}
-.header{position:fixed;top:0;left:0;right:0;height:var(--header-height);width:100%;max-width:none!important;margin:0!important;padding-inline:max(4%,calc((100vw - 1656px)/2));z-index:40;--header-surface:#000;--accent:#fff;color:#edf0f2;background:var(--header-surface);border:0;box-shadow:none;transition:transform .28s ease,box-shadow .4s}
+.header{position:fixed;top:0;left:0;right:0;height:var(--header-height);width:100%;max-width:none!important;margin:0!important;padding-inline:max(4%,calc((100vw - 1656px)/2));z-index:40;--header-surface:linear-gradient(180deg,#4c5e6c 0%,#24303a 46%,#000 100%);--accent:#fff;color:#edf0f2;background:var(--header-surface);border:0;box-shadow:none;transition:transform .28s ease,box-shadow .4s}
 .header-hidden .header{transform:translateY(calc(-100% - 24px));pointer-events:none}
 .header-hidden .reading-progress{top:0}
 .header.has-scrolled{box-shadow:0 8px 24px #02080f25}
